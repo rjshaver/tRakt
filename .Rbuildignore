@@ -4,5 +4,5 @@ key.json
 tests.R
 ^\.httr-oauth$
 .travis.yml
-#NEWS.md
+NEWS.md
 ^cran-comments\.md$

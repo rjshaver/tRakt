@@ -6,7 +6,7 @@ This is `tRakt` version `0.13.0`.
 It contains functions to pull data from [trakt.tv](http://trakt.tv/).
 
 It's an [R package](http://r-project.org) primarily used by (i.e. build for) [this webapp](http://trakt.jemu.name), but you can fiddle around with it if you like.  
-There might be some interesting things to play around with, and I've tried some of them [here](http://dump.jemu.name/tRakt-Usage.html) (Also included as a package vignette).
+There might be some interesting things to play around with, and I've tried some of them [here](http://cran.r-project.org/web/packages/tRakt/vignettes/tRakt-Usage.html) (Also included as a package vignette).
 
 ## Installation
 
