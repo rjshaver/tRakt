@@ -1,1 +1,5 @@
 language: r
+
+env:
+  - _R_CHECK_FORCE_SUGGESTS_=0
+  - WARNINGS_ARE_ERRORS=1
