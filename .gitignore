@@ -7,10 +7,13 @@
 .Rproj.user
 .Rhistory
 .RData
-tests.R
-key.json
 .httr-oauth
 .Rprofile
 
 # Ignore built vignettes
 inst/doc/*
+
+# Ignore other files
+tests.R
+key.json
+cran-comments.md
