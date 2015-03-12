@@ -5,3 +5,4 @@ tests.R
 ^\.httr-oauth$
 .travis.yml
 #NEWS.md
+^cran-comments\.md$
