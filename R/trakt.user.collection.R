@@ -24,6 +24,10 @@ trakt.user.collection <- function(user = getOption("trakt.username"), type = "sh
   url      <- build_trakt_url("users", user, "collection", type)
   response <- trakt.api.call(url = url)
 
+  if (identical(response, list())){
+    return(NULL)
+  }
+
   if (type == "shows"){
 
     # Drop specials (s00)

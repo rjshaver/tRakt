@@ -27,6 +27,10 @@ trakt.user.watched <- function(user = getOption("trakt.username"), type = "shows
   url      <- build_trakt_url("users", user, "watched", type)
   response <- trakt.api.call(url = url)
 
+  if (identical(response, list())){
+    return(NULL)
+  }
+
   if (type == "shows"){
     # Flatten out ids
     shows         <- cbind(response$show[!(names(response$show) %in% c("ids", "seasons"))],

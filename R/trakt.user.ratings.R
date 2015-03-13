@@ -29,6 +29,10 @@ trakt.user.ratings <- function(user = getOption("trakt.username"), type = "shows
   url      <- build_trakt_url("users", user, "ratings", type, rating)
   response <- trakt.api.call(url = url)
 
+  if (identical(response, list())){
+    return(NULL)
+  }
+
   # Flattening
   if (type == "shows"){
     response$show  <- cbind(response$show[names(response$show) != "ids"],  response$show$ids)
