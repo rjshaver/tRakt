@@ -65,18 +65,7 @@ trakt.people.summary <- function(target, extended = "min"){
 #' }
 trakt.people.movies <- function(target, extended = "min"){
 
-  # Construct URL, make API call
-  url      <- build_trakt_url("people", target, "movies", extended = extended)
-  response <- trakt.api.call(url = url)
-
-  # Flattening cast
-  if ("movie" %in% names(response$cast)){
-    response$cast$movie <- cbind(response$cast$movie[names(response$cast$movie) != "ids"],
-                                 response$cast$movie$ids)
-    response$cast       <- cbind(response$cast[names(response$cast) != "movie"],
-                                 response$cast$movie)
-    response$cast       <- convert_datetime(response$cast)
-  }
+  response <- trakt.people.credits("movies", target, extended = "min")
 
   return(response)
 }
@@ -101,9 +90,21 @@ trakt.people.movies <- function(target, extended = "min"){
 #' }
 trakt.people.shows <- function(target, extended = "min"){
 
+  response <- trakt.people.credits("shows", target, extended = "min")
+
+  return(response)
+}
+
+#' @keywords internal
+trakt.people.credits <- function(type, target, extended = "min"){
+
   # Construct URL, make API call
-  url      <- build_trakt_url("people", target, "shows", extended = extended)
+  url      <- build_trakt_url("people", target, type , extended = extended)
   response <- trakt.api.call(url = url)
+
+  if (identical(response, list())){
+    return(NULL)
+  }
 
   # Flattening cast
   if ("show" %in% names(response$cast)){
@@ -111,8 +112,13 @@ trakt.people.shows <- function(target, extended = "min"){
                                  response$cast$show$ids)
     response$cast       <- cbind(response$cast[names(response$cast) != "show"],
                                  response$cast$show)
-    response$cast       <- convert_datetime(response$cast)
+  } else if ("movie" %in% names(response$cast)){
+    response$cast$movie <- cbind(response$cast$movie[names(response$cast$movie) != "ids"],
+                                 response$cast$movie$ids)
+    response$cast       <- cbind(response$cast[names(response$cast) != "movie"],
+                                 response$cast$movie)
   }
+  response$cast       <- convert_datetime(response$cast)
 
   return(response)
 }
@@ -139,12 +145,7 @@ trakt.people.shows <- function(target, extended = "min"){
 trakt.show.people <- function(target, extended = "min"){
 
   # Construct URL, make API call
-  url      <- build_trakt_url("shows", target, "people", extended = extended)
-  response <- trakt.api.call(url = url)
-
-  # Flatten the data.frame
-  response$cast  <- cbind(response$cast[names(response$cast) != "person"], response$cast$person)
-  response$cast  <- cbind(response$cast[names(response$cast) != "ids"],    response$cast$ids)
+  response <- trakt.media.people("shows", target = target, extended = extended)
 
   return(response)
 }
@@ -170,9 +171,21 @@ trakt.show.people <- function(target, extended = "min"){
 #' }
 trakt.movie.people <- function(target, extended = "min"){
 
+  response <- trakt.media.people("movies", target = target, extended = extended)
+
+  return(response)
+}
+
+#' @keywords internal
+trakt.media.people <- function(type, target, extended = "min"){
+
   # Construct URL, make API call
-  url      <- build_trakt_url("movies", target, "people", extended = extended)
+  url      <- build_trakt_url(type, target, "people", extended = extended)
   response <- trakt.api.call(url = url)
+
+  if (identical(response, list())){
+    return(NULL)
+  }
 
   # Flatten the data.frame
   response$cast  <- cbind(response$cast[names(response$cast) != "person"], response$cast$person)

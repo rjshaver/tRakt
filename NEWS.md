@@ -1,5 +1,9 @@
 ## tRakt News
 
+### v0.13.1
+
+* Handle `NULL` cases for user functions (return `NULL` instead of failing on `list()`s)
+
 ### v0.13.0
 
 * **Rename** `trakt.getEpisodeData` -> `trakt.get_all_episodes`
