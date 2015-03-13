@@ -22,7 +22,10 @@ test_that("trakt.user.watched returns data.frame", {
 test_that("trakt.user.watchlist returns data.frame", {
   expect_is(trakt.user.watchlist(user = sample_user, type = "shows", extended = "min"), "data.frame")
   expect_is(trakt.user.watchlist(user = sample_user, type = "shows", extended = "full"), "data.frame")
-  expect_is(trakt.user.watchlist(user = sample_user, type = "movies", extended = "min"), "data.frame")
+  watchlist <- trakt.user.watchlist(user = sample_user, type = "movies", extended = "min")
+  if (!is.null(watchlist)){
+    expect_is(watchlist, "data.frame")
+  }
 })
 
 test_that("trakt.user.ratings returns data.frame", {
