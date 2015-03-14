@@ -81,7 +81,11 @@ parse_trakt_url <- function(url, epid = FALSE, getslug = FALSE){
 convert_datetime <- function(object){
   if (!(class(object) %in% c("data.frame", "list"))){
     stop("Object type not supported")
+  } else if (is.null(object) | identical(object, list())){
+    warning("Object is empty, returning without action")
+    return(objects)
   }
+
   datevars <- c("first_aired", "updated_at", "listed_at", "last_watched_at",
                 "rated_at", "friends_at", "followed_at", "collected_at", "joined_at")
 
