@@ -65,8 +65,8 @@ trakt.trending <- function(type, limit = 10, page = 1, extended = "min"){
   response <- trakt.api.call(url)
 
   if (type == "shows"){
-    response       <- cbind(response[names(response) != "show"], response$show)
     response$show  <- cbind(response$show[names(response$show) != "ids"], response$show$ids)
+    response       <- cbind(response[names(response) != "show"], response$show)
   } else if (type == "movies"){
     response$movie <- cbind(response$movie[names(response$movie) != "ids"], response$movie$ids)
     response       <- cbind(response[names(response) != "movie"], response$movie)
