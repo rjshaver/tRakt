@@ -132,7 +132,9 @@ trakt.api.call <- function(url, headers = getOption("trakt.headers"), fromJSONif
   if (fromJSONify){
     response <- jsonlite::fromJSON(response)
     if (convert.datetime){
-      response <- convert_datetime(response)
+      if (!is.null(response) & !(identical(response, list()))){
+        response <- convert_datetime(response)
+      }
     }
   }
   return(response)

@@ -2,7 +2,9 @@
 
 ### v0.13.1
 
-* Handle `NULL` cases for user functions (return `NULL` instead of failing on `list()`s)
+* Handle `NULL` cases for user functions (return `NULL` instead of failing on `list()`s).
+* Fix ids in `trakt.shows.trending` not being moved properly.
+* Make `convert_datetime` (internal) not fail on `NULL` or empty list input.
 
 ### v0.13.0
 
