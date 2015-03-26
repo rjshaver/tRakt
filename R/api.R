@@ -127,8 +127,15 @@ trakt.api.call <- function(url, headers = getOption("trakt.headers"), fromJSONif
     stop("HTTP headers not set, see ?get_trakt_credentials")
   }
   response   <- httr::GET(url, headers)
-  httr::stop_for_status(response) # In case trakt fails
+  httr::warn_for_status(response) # In case trakt fails
+
+  if (status_code(response) >= 500){
+    warning("trakt.tv is currently not available")
+    return(NULL)
+  }
+
   response   <- httr::content(response, as = "text")
+
   if (fromJSONify){
     response <- jsonlite::fromJSON(response)
     if (convert.datetime){

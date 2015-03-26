@@ -5,6 +5,9 @@
 * Handle `NULL` cases for user functions (return `NULL` instead of failing on `list()`s).
 * Fix ids in `trakt.shows.trending` not being moved properly.
 * Make `convert_datetime` (internal) not fail on `NULL` or empty list input.
+* Improve consistency of "season" variable, now always an ordered factor.
+* `trakt.api.call` doesn't throw an error but only a warning on trakt availability
+  * Idea is to not completely fail if trakt throws a 5xx error
 
 ### v0.13.0
 
