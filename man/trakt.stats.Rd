@@ -16,13 +16,9 @@ trakt.stats(target, type = "shows", extended = "min")
 Defaults to \code{"min"}, can either be \code{"min"} or \code{"full"}.}
 }
 \value{
-A \code{list} containing show stats
+A \code{data.frame} containing show stats
 }
 \description{
-DEFUNCT as of 2015-03-06,
-see \href{http://docs.trakt.apiary.io/reference/shows/stats/get-show-stats}{their API docs}
-}
-\details{
 \code{trakt.stats} pulls show stats and returns it compactly.
 The data includes show ratings, scrobbles, checkins, plays, comments…
 }
