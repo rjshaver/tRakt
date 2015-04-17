@@ -9,11 +9,10 @@
 .RData
 .httr-oauth
 .Rprofile
-
 # Ignore built vignettes
 inst/doc/*
-
 # Ignore other files
 tests.R
 key.json
 cran-comments.md
+helpers.R

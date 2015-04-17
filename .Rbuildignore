@@ -6,3 +6,4 @@ tests.R
 .travis.yml
 NEWS.md
 ^cran-comments\.md$
+helpers.R
