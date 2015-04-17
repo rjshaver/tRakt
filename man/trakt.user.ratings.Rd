@@ -8,11 +8,11 @@ trakt.user.ratings(user = getOption("trakt.username"), type = "shows",
   rating = NULL)
 }
 \arguments{
-\item{user}{Target user. Defaults to \code{getOption("trakt.username")}}
+\item{user}{Target user. Defaults to \code{getOption("trakt.username")}.}
 
-\item{type}{Either \code{shows} (default) or \code{movies}}
+\item{type}{Either \code{shows} (default), \code{movies} or \code{episodes}.}
 
-\item{rating}{A rating to filter by. Can be \code{1} through \code{10}, default is \code{NULL}}
+\item{rating}{A rating to filter by. Can be \code{1} through \code{10}, default is \code{NULL}.}
 }
 \value{
 A \code{list} or \code{data.frame} containing stats.

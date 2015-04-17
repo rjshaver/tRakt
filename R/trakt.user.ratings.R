@@ -1,9 +1,9 @@
 #' Get a user's ratings
 #'
 #' \code{trakt.user.ratings} pulls a user's ratings
-#' @param user Target user. Defaults to \code{getOption("trakt.username")}
-#' @param type Either \code{shows} (default) or \code{movies}
-#' @param rating A rating to filter by. Can be \code{1} through \code{10}, default is \code{NULL}
+#' @param user Target user. Defaults to \code{getOption("trakt.username")}.
+#' @param type Either \code{shows} (default), \code{movies} or \code{episodes}.
+#' @param rating A rating to filter by. Can be \code{1} through \code{10}, default is \code{NULL}.
 #' @return A \code{list} or \code{data.frame} containing stats.
 #' @export
 #' @note See \href{http://docs.trakt.apiary.io/reference/users/ratings/get-ratings}{the trakt API docs for further info}
