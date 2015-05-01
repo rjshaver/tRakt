@@ -7,9 +7,9 @@
 #' or in \code{~/.config/trakt/key.json}.
 #' Arguments to this function take precedence over any key file.
 #'
-#' @param username Explicitly set your trakt.tv username (Not used yet)
+#' @param username Explicitly set your trakt.tv username
 #' @param client.id Explicitly set your APIv2 client id
-#' @param client.secret Explicitly set your APIv2 client secret
+#' @param client.secret Explicitly set your APIv2 client secret (Not used yet)
 #' @param set.headers \code{TRUE} by default. Sets the \code{httr} headers
 #' for \code{GET} requests for the APIv2
 #' @param silent If TRUE (default), no messages are printed showing you the API information.

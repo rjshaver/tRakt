@@ -21,6 +21,7 @@
 trakt.stats <- function(target, type = "shows", extended = "min"){
   if (length(target) > 1){
     response <- plyr::ldply(target, function(t){
+      if (is.na(t)) return(NULL)
       response        <- trakt.stats(type = type, target = t, extended = extended)
       response$source <- t
       return(response)

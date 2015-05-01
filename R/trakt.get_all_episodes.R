@@ -89,6 +89,7 @@ trakt.get_all_episodes <- function(target, season_nums = NULL, extended = "full"
       show.episodes$episode_abs <- show.episodes$epnum
     }
   }
+  show.episodes <- show.episodes[show.episodes$episode != 0]
 
   # Append source
   show.episodes$src  <- "trakt.tv"
