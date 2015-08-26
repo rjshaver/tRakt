@@ -1,4 +1,4 @@
-tRakt [![Build Status](https://travis-ci.org/jemus42/tRakt.svg)](https://travis-ci.org/jemus42/tRakt)
+tRakt [![Build Status](https://travis-ci.org/jemus42/tRakt.svg)](https://travis-ci.org/jemus42/tRakt) ![](http://www.r-pkg.org/badges/version/tRakt) ![](http://cranlogs.r-pkg.org/badges/grand-total/tRakt)
 =============
 
 
