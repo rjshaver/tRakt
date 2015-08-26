@@ -1,7 +1,8 @@
 language: r
 
-env:
-  - _R_CHECK_FORCE_SUGGESTS_=0
-  - WARNINGS_ARE_ERRORS=1
+warnings_are_errors: true
 
-sudo: false
+r_binary_packages:
+ - testthat
+
+sudo: true
