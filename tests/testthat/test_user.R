@@ -32,7 +32,7 @@ test_that("trakt.user.ratings returns data.frame", {
   expect_is(trakt.user.ratings(user = sample_user, type = "shows"), "data.frame")
   expect_is(trakt.user.ratings(user = sample_user, type = "movies"), "data.frame")
   expect_is(trakt.user.ratings(user = sample_user, type = "shows", rating = 10), "data.frame")
-  expect_is(trakt.user.ratings(user = sample_user, type = "movies", rating = 10), "data.frame")
+  expect_is(trakt.user.ratings(user = sample_user, type = "movies", rating = 9), "data.frame")
 })
 
 #### Network related ####
