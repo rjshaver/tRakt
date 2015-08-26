@@ -4,4 +4,4 @@ env:
   - _R_CHECK_FORCE_SUGGESTS_=0
   - WARNINGS_ARE_ERRORS=1
 
-sudo: required
+sudo: false
