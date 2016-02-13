@@ -5,7 +5,8 @@ Version: 0.13.1
 Date: 2015-03-12
 Authors@R: person("Lukas Burk", email = "jemus42@gmail.com",
                   role = c("aut", "cre"))
-Description: A wrapper for the trakt.tv APIv2 which uses httr and jsonlite to send non-OAuth2 requests and receive tidied data.
+Description: A wrapper for the trakt.tv APIv2 which uses httr and jsonlite to
+    send non-OAuth2 requests and receive tidied data.
 Depends:
     R (>= 3.0.2)
 Imports:
@@ -26,3 +27,4 @@ Roxygen: list(wrap = FALSE)
 Encoding: UTF-8
 URL: http://github.com/jemus42/tRakt
 BugReports: http://github.com/jemus42/tRakt/issues
+RoxygenNote: 5.0.1
