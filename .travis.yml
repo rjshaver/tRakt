@@ -1,8 +1,14 @@
 language: r
 
-warnings_are_errors: true
+sudo: required
 
 r_binary_packages:
  - testthat
+ - plyr
+ - httr
+ - dplyr
+ - jsonlite
 
-sudo: true
+env:
+ global:
+   - CRAN: https://cran.rstudio.com
