@@ -3,7 +3,7 @@ Type: Package
 Title: Pull Data from 'trakt.tv'
 Version: 0.13.1
 Date: 2015-03-12
-Authors@R: person("Lukas Burk", email = "jemus42@gmail.com",
+Authors@R: person("Lukas Burk", email = "lukas@quantenbrot.de",
                   role = c("aut", "cre"))
 Description: A wrapper for the trakt.tv APIv2 which uses httr and jsonlite to
     send non-OAuth2 requests and receive tidied data.
