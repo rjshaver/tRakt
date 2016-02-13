@@ -11,10 +11,9 @@
 #' @family user data
 #' @examples
 #' \dontrun{
-#' get_trakt_credentials() # Set required API data/headers
-#' myshows      <- trakt.user.collection() # Defaults to your username if set
-#' seans.movies <- trakt.user.collection(user = "sean", type = "movies)
+#' collection <- trakt.user.collection(user = "sean", type = "movies")
 #' }
+
 trakt.user.collection <- function(user = getOption("trakt.username"), type = "shows"){
   if (is.null(user) && is.null(getOption("trakt.username"))){
     stop("No username is set.")

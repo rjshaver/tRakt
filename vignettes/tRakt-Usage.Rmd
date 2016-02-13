@@ -1,7 +1,7 @@
 ---
 title: "Using tRakt"
 author: "@jemus42"
-date: "`r format(Sys.time(), "%F", tz = "UTC", usetz = T)`"
+date: "`r format(Sys.time(), '%F', tz = 'UTC', usetz = T)`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using tRakt}

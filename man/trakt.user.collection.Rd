@@ -22,6 +22,11 @@ public profile.
 \note{
 See \href{http://docs.trakt.apiary.io/reference/users/collection/get-collection}{the trakt API docs for further info}
 }
+\examples{
+\dontrun{
+collection <- trakt.user.collection(user = "sean", type = "movies")
+}
+}
 \seealso{
 Other user data: \code{\link{trakt.user.followers}},
   \code{\link{trakt.user.following}},
