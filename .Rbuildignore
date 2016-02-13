@@ -7,3 +7,5 @@ tests.R
 NEWS.md
 ^cran-comments\.md$
 helpers.R
+^README\.Rmd$
+^README-.*\.png$
