@@ -16,6 +16,7 @@ Imports:
     plyr (>= 1.8.1),
     stringr
 Suggests:
+    rmarkdown,
     knitr,
     dplyr (>= 0.4.1),
     ggplot2,
