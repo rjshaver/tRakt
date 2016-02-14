@@ -16,11 +16,13 @@ Installation
 
 Get the latest dev version from GitHub:
 
-    if (!("devtools" %in% installed.packages())){
-      install.packages("devtools")
-    }
+``` r
+if (!("devtools" %in% installed.packages())){
+  install.packages("devtools")
+}
 
-    devtools::install_github("jemus42/tRakt")
+devtools::install_github("jemus42/tRakt")
+```
 
 Setting credentials
 -------------------

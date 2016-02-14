@@ -29,7 +29,7 @@ There might be some interesting things to play around with, and I've tried some 
 
 Get the latest dev version from GitHub:
 
-```
+```r
 if (!("devtools" %in% installed.packages())){
   install.packages("devtools")
 }
