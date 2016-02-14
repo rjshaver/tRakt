@@ -2,11 +2,13 @@
 title: "Using tRakt"
 author: "@jemus42"
 date: "`r format(Sys.time(), '%F', tz = 'UTC', usetz = T)`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: yes
 vignette: >
   %\VignetteIndexEntry{Using tRakt}
-  %\VignetteEngine{rmarkdown::render}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 ## First step: Loading packages and trakt.tv credentials
 
