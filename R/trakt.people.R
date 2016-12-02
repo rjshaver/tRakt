@@ -10,6 +10,7 @@
 #' Defaults to \code{"min"}, can either be \code{"min"} or \code{"full"}
 #' @return A \code{data.frame}s with person details.
 #' @export
+#' @importFrom purrr map_df
 #' @note See \href{http://docs.trakt.apiary.io/reference/people/summary/get-a-single-person}{the trakt API docs for further info}
 #' @family people data
 #' @examples
@@ -20,7 +21,7 @@
 trakt.people.summary <- function(target, extended = "min"){
 
   if (length(target) > 1){
-    response <- plyr::ldply(target, function(t){
+    response <- purrr::map_df(target, function(t){
       response <- trakt.people.summary(target = t, extended = extended)
       response$person <- t
       return(response)
