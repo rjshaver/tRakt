@@ -1,5 +1,9 @@
 ## tRakt News
 
+### v0.13.2
+
+- Migrate from `plyr` to `purrr` and `dplyr`
+
 ### v0.13.1
 
 * Handle `NULL` cases for user functions (return `NULL` instead of failing on `list()`s).

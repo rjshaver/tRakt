@@ -14,6 +14,7 @@
 #' @export
 #' @importFrom lubridate origin
 #' @importFrom lubridate year
+#' @importFrom purrr map_df
 #' @note See \href{http://docs.trakt.apiary.io/reference/seasons/season/get-single-season-for-a-show}{the trakt API docs for further info}.
 #' If you want to quickly gather data of multiple seasons, see \link[tRakt]{trakt.get_all_episodes}
 #' @family show data
@@ -23,8 +24,8 @@
 #' breakingbad.seasons <- trakt.seasons.season("breaking-bad", 1)
 #' }
 trakt.seasons.season <- function(target, seasons = 1, extended = "min"){
-  if (length(seasons) > 1){
-    response <- plyr::ldply(seasons, function(s){
+  if (length(seasons) > 1) {
+    response <- purrr::map_df(seasons, function(s){
       response <- trakt.seasons.season(target, s, extended = extended)
       return(response)
     })
@@ -36,7 +37,7 @@ trakt.seasons.season <- function(target, seasons = 1, extended = "min"){
   season  <- trakt.api.call(url = url)
 
   # Catch unknown season error
-  if (identical(season, list())){
+  if (identical(season, list())) {
     warning(paste("Season", seasons, " of ", target, "does not appear to exist"))
     return(NULL)
   }
@@ -47,11 +48,11 @@ trakt.seasons.season <- function(target, seasons = 1, extended = "min"){
   season        <- cbind(season[names(season) != "ids"], season$ids)
 
   # If full data is pulled, ehance the dataset a little
-  if ("first_aired" %in% names(season)){
+  if ("first_aired" %in% names(season)) {
     season$first_aired.string <- format(season$first_aired, "%F")
     season$year               <- lubridate::year(season$first_aired)
   }
-  if ("images" %in% names(season)){
+  if ("images" %in% names(season)) {
     names(season$images$screenshot) <- paste0("screenshot.", names(season$images$screenshot))
     season                          <- cbind(season[names(season) != "images"], season$images$screenshot)
   }
@@ -75,6 +76,7 @@ trakt.seasons.season <- function(target, seasons = 1, extended = "min"){
 #' Only works if \code{extended} is set to more than \code{min}.
 #' @return A \code{data.frame} containing season details (nested in \code{list} objects)
 #' @export
+#' @importFrom purrr map_df
 #' @note See \href{http://docs.trakt.apiary.io/reference/seasons/summary}{the trakt API docs}
 #' for further info
 #' @family show data
@@ -85,8 +87,8 @@ trakt.seasons.season <- function(target, seasons = 1, extended = "min"){
 #' }
 trakt.seasons.summary <- function(target, extended = "min", dropspecials = TRUE, dropunaired = TRUE){
 
-    if (length(target) > 1){
-    response <- plyr::ldply(target, function(t){
+    if (length(target) > 1) {
+    response <- purrr::map_df(target, function(t){
       response <- trakt.seasons.summary(target = t, extended = extended,
                                         dropspecials = dropspecials, dropunaired = dropunaired)
       response$show <- t
@@ -100,10 +102,10 @@ trakt.seasons.summary <- function(target, extended = "min", dropspecials = TRUE,
   seasons <- trakt.api.call(url = url)
 
   # Data cleanup
-  if (dropspecials){
+  if (dropspecials) {
     seasons <- seasons[seasons$number != 0, ]
   }
-  if (dropunaired & "aired_episodes" %in% names(seasons)){
+  if (dropunaired & "aired_episodes" %in% names(seasons)) {
     seasons <- seasons[seasons$aired_episodes > 0, ]
   }
   # Reorganization
@@ -112,7 +114,7 @@ trakt.seasons.summary <- function(target, extended = "min", dropspecials = TRUE,
 
   # Flattening
   seasons <- cbind(seasons[names(seasons) != "ids"], seasons$ids)
-  if ("images" %in% names(seasons)){
+  if ("images" %in% names(seasons)) {
     names(seasons$images$poster) <- paste0("poster.", names(seasons$images$poster))
     seasons$images               <- cbind(seasons$images[names(seasons$images) != "poster"], seasons$images$poster)
     names(seasons$images$thumb)  <- paste0("thumb.", names(seasons$images$thumb))
