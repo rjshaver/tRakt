@@ -9,6 +9,7 @@
 #' @param dropunaired If \code{TRUE}, episodes which have not aired yet are dropped.
 #' @return A \code{list} containing multiple \code{lists} and \code{data.frames} with show info.
 #' @export
+#' @importFrom stats sd
 #' @note This is primarily intended to be a convenience function for the case where you
 #' really want all that data. If you're just derping around, maybe you should consider interactively
 #' calling the other functions.
@@ -28,10 +29,10 @@ trakt.get_full_showdata <- function(query = NULL, slug = NULL, dropunaired = TRU
 
   # Construct show object
   show        <- list()
-  if (!is.null(query)){
+  if (!is.null(query)) {
     show$info <- trakt.search(query)
     slug      <- show$info$ids$slug
-  } else if (is.null(query) & is.null(slug)){
+  } else if (is.null(query) & is.null(slug)) {
     stop("You must provide either a search query or a trakt.tv slug")
   }
   show$summary  <- trakt.show.summary(slug, extended = "full")
@@ -40,7 +41,7 @@ trakt.get_full_showdata <- function(query = NULL, slug = NULL, dropunaired = TRU
                                         dropunaired = dropunaired, extended = "full")
   show$seasons  <- plyr::join(show$seasons , plyr::ddply(show$episodes, "season", plyr::summarize,
                                                         avg.rating.season     = round(mean(rating), 1),
-                                                        rating.sd             = sd(rating),
+                                                        rating.sd             = stats::sd(rating),
                                                         top.rating.episode    = max(rating),
                                                         lowest.rating.episode = min(rating)))
   show$seasons$season  <- factor(show$seasons$season,

@@ -37,7 +37,7 @@ trakt.people.summary <- function(target, extended = "min"){
   # Flatten the data.frame
   response <- purrr::flatten(response)
 
-  return(data)
+  return(response)
 }
 
 #' Get a single person's movie credits

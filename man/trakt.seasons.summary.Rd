@@ -11,8 +11,7 @@ trakt.seasons.summary(target, extended = "min", dropspecials = TRUE,
 \item{target}{The \code{id} of the show requested. Either the \code{slug}
 (e.g. \code{"game-of-thrones"}), \code{trakt id} or \code{IMDb id}}
 
-\item{extended}{Use \code{full,images} to get season posters. Can be
-\code{min} (default), \code{images}, \code{full}, \code{full,images}}
+\item{extended}{Can be \code{min} (default), \code{images}, \code{full}.}
 
 \item{dropspecials}{If \code{TRUE} (default), special episodes (listed as 'season 0') are dropped}
 
