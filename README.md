@@ -5,7 +5,7 @@ tRakt
 
 [![Build Status](https://travis-ci.org/jemus42/tRakt.svg)](https://travis-ci.org/jemus42/tRakt) ![](http://www.r-pkg.org/badges/version/tRakt) ![](http://cranlogs.r-pkg.org/badges/grand-total/tRakt) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
 
-This is `tRakt` version `0.13.1`.
+This is `tRakt` version `0.14.0`.
 It contains functions to pull data from [trakt.tv](http://trakt.tv/).
 
 It's an [R package](http://r-project.org) primarily used by (i.e. build for) [this webapp](http://trakt.jemu.name), but you can fiddle around with it if you like.
