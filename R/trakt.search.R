@@ -21,6 +21,7 @@
 #'   further info}
 #' @family API-basics
 #' @family search functions
+#' @importFrom utils URLdecode
 #' @examples
 #' \dontrun{
 #' get_trakt_credentials() # Set required API data/headers
@@ -29,7 +30,7 @@
 trakt.search <- function(query, type = "show", year = NULL){
 
   # Parse query for possible year
-  if (is.null(year) & !(is.na(stringr::str_match(query, "(\\d{4})$")[1]))){
+  if (is.null(year) & !(is.na(stringr::str_match(query, "(\\d{4})$")[1]))) {
     year  <- stringr::str_match(query, "(\\d{4})$")[1]
     query <- stringr::str_replace(query, "(\\d{4})$", "")
     query <- stringr::str_trim(query)
@@ -40,16 +41,16 @@ trakt.search <- function(query, type = "show", year = NULL){
   response <- trakt.api.call(url = url, convert.datetime = F)
 
   # Check if response is empty (nothing found)
-  if (identical(response, list())){
+  if (identical(response, list())) {
     warning("No result, sorry.")
     return(list(error = "Nothing found"))
   }
 
   # Try to find the closest match via basic string comparison (Could use improvement)
-  stringmatch <- match(tolower(URLdecode(query)), tolower(response[[type]]$title))
+  stringmatch <- match(tolower(utils::URLdecode(query)), tolower(response[[type]]$title))
 
   # Cleanup received data, using only matched line
-  if (is.na(stringmatch)){
+  if (is.na(stringmatch)) {
     warning("No exact match found, using trakt.tv's best guess")
     result <- response[1, ][[type]]
   } else {
@@ -70,8 +71,6 @@ trakt.search <- function(query, type = "show", year = NULL){
 #' @return A \code{data.frame} containing a single search result. Hopefully the one you wanted.
 #' If no result is found, the return value is \code{list(error = "Nothing found")} and a \code{warning}
 #' @export
-#' @importFrom jsonlite fromJSON
-#' @import httr
 #' @note See \href{http://docs.trakt.apiary.io/reference/search/id-lookup/get-id-lookup-results}{the trakt API docs for further info}
 #' @family API-basics
 #' @family search functions
@@ -87,7 +86,7 @@ trakt.search.byid <- function(id, id_type = "trakt-show"){
   response <- trakt.api.call(url = url)
 
   # Check if response is empty (nothing found)
-  if (identical(response, list())){
+  if (identical(response, list())) {
     warning("No result, sorry.")
     return(list(error = "Nothing found"))
   }

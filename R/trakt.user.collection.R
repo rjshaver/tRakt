@@ -29,11 +29,6 @@ trakt.user.collection <- function(user = getOption("trakt.username"), type = "sh
 
   if (type == "shows") {
 
-    # Drop specials (s00)
-    for (i in nrow(response$show)) {
-      response$seasons[[i]]$episodes <- response$seasons[[i]]$episodes[response$seasons[[i]]$number != 0]
-    }
-
     epstats <- purrr::map_df(1:nrow(response), function(show) {
       title <- response[show, ]$show$title
       #print(paste(show, title))

@@ -69,8 +69,7 @@ trakt.seasons.season <- function(target, seasons = 1, extended = "min"){
 #' \code{extended} to customize output amount.
 #' @param target The \code{id} of the show requested. Either the \code{slug}
 #' (e.g. \code{"game-of-thrones"}), \code{trakt id} or \code{IMDb id}
-#' @param extended Use \code{full,images} to get season posters. Can be
-#' \code{min} (default), \code{images}, \code{full}, \code{full,images}
+#' @param extended Can be \code{min} (default), \code{images}, \code{full}.
 #' @param dropspecials If \code{TRUE} (default), special episodes (listed as 'season 0') are dropped
 #' @param dropunaired If \code{TRUE} (default), seasons with \code{aired_episodes == 0} are dropped.
 #' Only works if \code{extended} is set to more than \code{min}.

@@ -5,6 +5,7 @@
 #' (e.g. \code{"tron-legacy-2010"}), \code{trakt id} or \code{IMDb id}
 #' @return A \code{list} containing movie ratings and distribution
 #' @export
+#' @importFrom purrr map
 #' @note See \href{http://docs.trakt.apiary.io/reference/movies/ratings/get-movie-ratings}{the trakt API docs for further info}
 #' @family movie data
 #' @examples
@@ -44,7 +45,7 @@ trakt.show.ratings <- function(target){
 trakt.ratings <- function(type, target){
 
   if (length(target) > 1){
-    response <- plyr::llply(target, function(t){
+    response <- purrr::map(target, function(t){
       response       <- trakt.ratings(type = type, target = t)
       ratings        <- response[c("rating", "votes")]
       ratings$source <- t

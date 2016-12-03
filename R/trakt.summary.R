@@ -41,6 +41,7 @@ trakt.movie.summary <- function(target, extended = "min", force_data_frame = FAL
 #' in a flat \code{data.frame} suitable to be \code{rbind}ed to other summary results.
 #' @return A \code{list} or \code{data.frame} containing summary info
 #' @export
+#' @importFrom purrr map_df
 #' @note See \href{http://docs.trakt.apiary.io/reference/shows/summary}{the trakt API docs for further info}
 #' @family show data
 #' @examples
@@ -57,8 +58,8 @@ trakt.show.summary <- function(target, extended = "min", force_data_frame = FALS
 
 #' @keywords internal
 trakt.summary <- function(type, target, extended = "min", force_data_frame = FALSE){
-  if (length(target) > 1){
-    response <- plyr::ldply(target, function(t){
+  if (length(target) > 1) {
+    response <- purrr::map_df(target, function(t){
       response <- trakt.summary(type = type, target = t, extended = extended, force_data_frame = TRUE)
       return(response)
     })
@@ -69,19 +70,19 @@ trakt.summary <- function(type, target, extended = "min", force_data_frame = FAL
   url      <- build_trakt_url(type, target, extended = extended)
   response <- trakt.api.call(url = url)
 
-  if (force_data_frame){
+  if (force_data_frame) {
     temp <- response[sapply(response, length) == 1]
     temp[unlist(lapply(temp, is.null))] <- NA
     temp                                <- as.data.frame(temp)
     temp                                <- cbind(temp, response$ids)
-    if ("airs" %in% names(response)){
+    if ("airs" %in% names(response)) {
       names(response$airs)                <- paste0("airs.", names(response$airs))
       temp                                <- cbind(temp, response$airs)
     }
-    if ("available_translations" %in% names(response)){
+    if ("available_translations" %in% names(response)) {
       temp[["available_translations"]]    <- I(list(response$available_translations))
     }
-    if ("images" %in% names(response)){
+    if ("images" %in% names(response)) {
       temp[["images"]][[1]]               <- I(response$images)
     }
     response <- temp

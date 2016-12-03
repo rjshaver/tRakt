@@ -10,6 +10,7 @@
 #' Defaults to \code{"min"}, can either be \code{"min"} or \code{"full"}
 #' @return A \code{data.frame}s with person details.
 #' @export
+#' @importFrom purrr flatten
 #' @importFrom purrr map_df
 #' @note See \href{http://docs.trakt.apiary.io/reference/people/summary/get-a-single-person}{the trakt API docs for further info}
 #' @family people data
@@ -20,7 +21,7 @@
 #' }
 trakt.people.summary <- function(target, extended = "min"){
 
-  if (length(target) > 1){
+  if (length(target) > 1) {
     response <- purrr::map_df(target, function(t){
       response <- trakt.people.summary(target = t, extended = extended)
       response$person <- t
@@ -34,14 +35,7 @@ trakt.people.summary <- function(target, extended = "min"){
   response <- trakt.api.call(url = url)
 
   # Flatten the data.frame
-  # Fix NULLs (screw up data.frame conversion)
-  response$ids[unlist(lapply(response$ids, is.null))] <- NA
-  ids  <- as.data.frame(response$ids)
-  data <- response[names(response) != "ids"]
-  # Fix NULLs (screw up data.frame conversion)
-  data[unlist(lapply(data, is.null))] <- NA
-  data <- as.data.frame(data)
-  data <- cbind(data, ids)
+  response <- purrr::flatten(response)
 
   return(data)
 }
@@ -103,12 +97,12 @@ trakt.people.credits <- function(type, target, extended = "min"){
   url      <- build_trakt_url("people", target, type , extended = extended)
   response <- trakt.api.call(url = url)
 
-  if (identical(response, list())){
+  if (identical(response, list())) {
     return(NULL)
   }
 
   # Flattening cast
-  if ("show" %in% names(response$cast)){
+  if ("show" %in% names(response$cast)) {
     response$cast$show  <- cbind(response$cast$show[names(response$cast$show) != "ids"],
                                  response$cast$show$ids)
     response$cast       <- cbind(response$cast[names(response$cast) != "show"],
@@ -184,7 +178,7 @@ trakt.media.people <- function(type, target, extended = "min"){
   url      <- build_trakt_url(type, target, "people", extended = extended)
   response <- trakt.api.call(url = url)
 
-  if (identical(response, list())){
+  if (identical(response, list())) {
     return(NULL)
   }
 
