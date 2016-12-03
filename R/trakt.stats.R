@@ -10,6 +10,7 @@
 #' Defaults to \code{"min"}, can either be \code{"min"} or \code{"full"}.
 #' @return A \code{data.frame} containing show stats
 #' @export
+#' @importFrom purrr map_df
 #' @note See \href{http://docs.trakt.apiary.io/#reference/shows/stats}{the trakt API docs for further info}
 #' @family show data
 #' @family movie data
@@ -19,8 +20,8 @@
 #' breakingbad.stats <- trakt.stats(type = "shows", "breaking-bad")
 #' }
 trakt.stats <- function(target, type = "shows", extended = "min"){
-  if (length(target) > 1){
-    response <- plyr::ldply(target, function(t){
+  if (length(target) > 1) {
+    response <- purrr::map_df(target, function(t){
       if (is.na(t)) return(NULL)
       response        <- trakt.stats(type = type, target = t, extended = extended)
       response$source <- t
