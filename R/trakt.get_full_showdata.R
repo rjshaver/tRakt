@@ -24,9 +24,6 @@
 #' }
 trakt.get_full_showdata <- function(query = NULL, slug = NULL, dropunaired = TRUE){
 
-  # Bind variables later used to please R CMD CHECK
-  rating  <- NULL
-
   # Construct show object
   show        <- list()
   if (!is.null(query)) {
@@ -39,11 +36,7 @@ trakt.get_full_showdata <- function(query = NULL, slug = NULL, dropunaired = TRU
   show$seasons  <- trakt.seasons.summary(slug, extended = "full", dropspecials = TRUE)
   show$episodes <- trakt.get_all_episodes(slug, show$seasons$season,
                                         dropunaired = dropunaired, extended = "full")
-  show$seasons  <- plyr::join(show$seasons , plyr::ddply(show$episodes, "season", plyr::summarize,
-                                                        avg.rating.season     = round(mean(rating), 1),
-                                                        rating.sd             = stats::sd(rating),
-                                                        top.rating.episode    = max(rating),
-                                                        lowest.rating.episode = min(rating)))
+
   show$seasons$season  <- factor(show$seasons$season,
                                  levels = as.character(1:nrow(show$seasons)), ordered = T)
   show$episodes$series <- show$summary$title
